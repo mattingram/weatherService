@@ -64,6 +64,12 @@ namespace WeatherService
 
             //app.Filters.Add(new AddHeaderAttribute("Access-Control-Allow-Origin", "*"));
 
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Chart}/{action=Index}/");
+            });
         }
     }
 
