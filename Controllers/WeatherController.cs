@@ -17,6 +17,7 @@ namespace WeatherService.Controllers
 
         // GET api/weather
         [HttpGet]
+        [AddHeaderAttribute("Access-Control-Allow-Origin", "*")]
         public IEnumerable<WeatherData> Get()
         {
             return _context.Weather.ToList().OrderByDescending(w => w.Time).Take(100);
