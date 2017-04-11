@@ -11,7 +11,7 @@
 
       // onload callback
       function drawChart() {
-        
+
         // JSONP request
         var jsonData = $.ajax({
           url: weatherDataUrl,
@@ -30,14 +30,15 @@
               (new Date(row.time)),
               parseFloat(row.temp),
               parseFloat(row.humid),
-              parseFloat(row.press)
+              parseFloat(row.press/10)
             ]);
           });
 
-          var chart = new google.visualization.LineChart($('#chart').get(0));
+          var chart = new google.charts.Line($('#chart').get(0));
 
           chart.draw(data, {
-            title: 'Weather Station'
+            title: 'Weather Station',
+            curveType: 'function',
           });
 
         });
@@ -46,7 +47,7 @@
 
       // load chart lib
       google.load('visualization', '1', {
-        packages: ['corechart']
+        packages: ['line']
       });
 
       // call drawChart once google charts is loaded
