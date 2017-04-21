@@ -9,6 +9,11 @@
     <script>
       var weatherDataUrl = 'api/weather/'
 
+      function convertPressureToAltitude(millibars)
+      {
+        return (1-Math.pow(millibars/1013.25,0.190284))*145366.45;
+      }
+
       // onload callback
       function drawChart() {
 
@@ -23,14 +28,14 @@
           data.addColumn('datetime', 'Time');
           data.addColumn('number', 'Temp');
           data.addColumn('number', 'Humidity');
-          //data.addColumn('number', 'Pressure');
+          data.addColumn('number', 'Altitude');
 
           $.each(results, function (i, row) {
             data.addRow([
               new Date(row.time)
               ,parseFloat(row.temp)
               ,parseFloat(row.humid)
-              //,parseFloat(row.press/10)
+              ,parseFloat(convertPressureToAltitude(row.press)/100)
             ]);
           });
 
